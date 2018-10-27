@@ -15,9 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+import medium.urls
+from rest_auth.registration.views import LoginView
 
 urlpatterns = [
     url(r'^', admin.site.urls),
     url(r'^admin/', admin.site.urls),
     url(r'^medium/', include('medium.urls')),
+    url(r'^rest-auth/login/',
+        medium.views.LoginViewCustom.as_view(),
+        name='rest_login'),
+    url(r'^rest-auth/', include('rest_auth.urls')),
 ]
